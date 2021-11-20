@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\Training;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
@@ -20,5 +23,73 @@ class StudentController extends Controller
 
         $trainings = Training::all(['id','label']);
         return view('student.index')->with(['trainings'=>$trainings]);
+    }
+
+
+    public function create(Request $request)
+    {
+        $validated = $request->validate([
+            'training_id' => 'required|integer|exists:trainings,id',
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'birth_day'=> 'required|date',
+            'sex' => 'required',
+            'education_level' => 'required|string',
+            'study_domain'=>'required|string',
+            'email'=>'required|email|unique:users,email',
+            'email' => 'required|email|unique:students,email',
+            'address'=>'required|string',
+            'tel'=>'required|max:10',
+            'parent_tel'=>'required|max:10'
+        ]);
+
+        $student = new Student();
+        $student->id_training = $request->training_id;
+        $student->firstName = $request->first_name;
+        $student->lastName = $request->last_name;
+        $student->birthday = $request->birth_day;
+        $student->sex = $request->sex;
+        $student->educationLevel = $request->education_level;
+        $student->branchOfStudy = $request->study_domain;
+        $student->email = $request->email;
+        $student->address = $request->address;
+        $student->tel = $request->tel;
+        $student->parentContact = $request->parent_tel;
+        $student->save();
+
+        // Create student account
+        User::create([
+            'name' => $request->last_name,
+            'email' => $request->email,
+            'password' => Hash::make($request->tel),
+            'type' => 'student'
+        ]);
+        
+        // Send mail to user
+
+        return redirect('create_student')->with('message', 'L\'apprenant à été ajouter avec succès !');
+
+    }
+
+    public function passwordSet()
+    {
+        return view('student.password_set');
+    }
+
+    public function modif_password(Request $request)
+    {
+       $validated = $request->validate([
+           'email'=>'required|exists:users,email',
+           'old_password' => 'required|min:8',
+           'new_password' => 'required|min:8',
+       ]);
+
+
+       $user = User::find(Auth::id());
+
+       $user->password = Hash::make($request->new_password);
+       $user->save();
+
+       return redirect('home')->with('password_success', 'Mot de passe modifier avec succès !');
     }
 }

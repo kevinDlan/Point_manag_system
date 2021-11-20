@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RoutersIpController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +20,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// php artisan make:controller rnameController --ressource
+// php artisan make:model mName -c -r --resource=
+// Route::resource('rname', rnameController::class);
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/create_traning',[App\Http\Controllers\TrainingController::class, 'index'])->name('training');
 Route::get('/add_partner',[App\Http\Controllers\PartnerController::class,'index'])->name('create-partner-form');
@@ -27,4 +32,9 @@ Route::get('/create_ref',[App\Http\Controllers\ReferentialController::class, 'in
 Route::post('/save_ref',[App\Http\Controllers\ReferentialController::class, 'create'])->name('save-referential');
 Route::post('/create_training',[App\Http\Controllers\TrainingController::class, 'create'])->name('save-training');
 Route::get('/create_student',[App\Http\Controllers\StudentController::class, 'index'])->name('create-student-form');
-Route::get('/save_student', [App\Http\Controllers\StudentController::class, 'create'])->name('save-student');
+Route::post('/save_student', [App\Http\Controllers\StudentController::class, 'create'])->name('save-student');
+Route::get('/password_set_form',[App\Http\Controllers\StudentController::class,'passwordSet'])->name('password-set-form');
+Route::post('/password-set',[App\Http\Controllers\StudentController::class, 'modif_password'])->name('change-password');
+Route::get('/register_',[App\Http\Controllers\RegisterController::class, 'index'])->name('register-view');
+Route::post('/register_save',[App\Http\Controllers\RegisterController::class,'create'])->name('register_save');
+Route::resource('router_ip', RoutersIpController::class);
