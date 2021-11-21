@@ -41,3 +41,4 @@ Route::post('/register_save',[App\Http\Controllers\RegisterController::class,'cr
 Route::resource('router_ip', RoutersIpController::class);
 Route::get('register_list',[App\Http\Controllers\StudentController::class,'registerList'])->name('register-list');
 Route::get('/presence_list',[App\Http\Controllers\HomeController::class,'presenceList'])->name('presence-liste');
+Route::get('/search_data_by_date/{date}',[App\Http\Controllers\HomeController::class, 'search'])->name('fetch-date-data');

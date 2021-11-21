@@ -17,6 +17,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     {{-- Sweet Alert --}}
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {{-- moment JS --}}
+    <script src="{{asset('js/moment.js')}}"></script>
 </head>
 <body>
     <div id="app">
@@ -57,6 +59,11 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
+                                @if(Route::has('home'))
+                               <li class="nav-item">
+                                  <a class="nav-link" href="{{ route('home')}}">{{ __('Dashbord') }}</a>
+                               </li>
+                            @endif
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Register;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -28,7 +30,19 @@ class HomeController extends Controller
 
     public function presenceList()
     {
-    //  
-    dd('En cour de Dev');
+       $presence_lists = DB::select('SELECT firstName,lastName,dayDate,morningSignIn,eveningSignIn 
+                                     FROM students,registers,users WHERE registers.id_student=users.id 
+                                     AND users.email=students.email');
+       return view('admin.student_presence_list',['presence_lists'=>$presence_lists]);
+    }
+
+    public function search($date)
+    {
+        // dd($date);
+        $presence_lists = DB::select('SELECT firstName,lastName,dayDate,morningSignIn,eveningSignIn 
+                                     FROM students,registers,users WHERE registers.id_student=users.id 
+                                     AND users.email=students.email
+                                     AND dayDAte = :dat',['dat'=>$date]);
+        return json_encode($presence_lists);
     }
 }
