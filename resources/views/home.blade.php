@@ -11,9 +11,10 @@
                    <a href="{{route('create-train-ref')}}">Création de référentiel</a><br>
                    <a href="{{route('training')}}">Créer une formation</a><br>
                    <a href="{{route('create-student-form')}}">Enregistrer un Apprenant</a>
+                   <a href="{{route('presence-liste')}}">Liste de présence</a>
                    @elseif (Auth::user()->type === 'student')
                    <a href="{{route('register-view')}}">Pointer ma présence</a><br>
-                   <a href="{{route('create-partner-form')}}">Recap de mes présences</a><br>
+                   <a href="{{route('register-list')}}">Recap de mes présences</a><br>
                    <a href="{{route('password-set-form')}}">Modifier mon de passe</a><br>
                    @else
                    {{-- something --}}
@@ -24,7 +25,7 @@
     </div>
 </div>
 @endsection
-@section('js')
+@push('js')
 <script type="text/javascript">
     @if(session('password_success'))
         Swal.fire(
@@ -51,5 +52,4 @@
             'info');
     @endif
 </script>
- 
-@endsection
+@endpush

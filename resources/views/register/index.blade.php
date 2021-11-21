@@ -58,7 +58,7 @@
     </div>
 </div>
 @endsection
-@section('js')
+@push('script')
   <script type="text/javascript">
         // Getting ip address
         const getIP = async () => 
@@ -125,4 +125,4 @@
     // }
     // navigator.geolocation.getCurrentPosition(getPosition,getError);
   </script>
-@endsection
+@endpush

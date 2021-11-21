@@ -14,8 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function () 
+{
+    return view('index');
 });
 
 Auth::routes();
@@ -38,3 +39,5 @@ Route::post('/password-set',[App\Http\Controllers\StudentController::class, 'mod
 Route::get('/register_',[App\Http\Controllers\RegisterController::class, 'index'])->name('register-view');
 Route::post('/register_save',[App\Http\Controllers\RegisterController::class,'create'])->name('register_save');
 Route::resource('router_ip', RoutersIpController::class);
+Route::get('register_list',[App\Http\Controllers\StudentController::class,'registerList'])->name('register-list');
+Route::get('/presence_list',[App\Http\Controllers\HomeController::class,'presenceList'])->name('presence-liste');

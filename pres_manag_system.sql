@@ -2,10 +2,10 @@
 -- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost:3306
--- Généré le : ven. 19 nov. 2021 à 21:12
--- Version du serveur :  5.7.24
--- Version de PHP : 7.4.20
+-- Host: localhost:3306
+-- Generation Time: Nov 21, 2021 at 10:50 AM
+-- Server version: 5.7.24
+-- PHP Version: 7.4.20
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `pres_manag_system`
+-- Database: `pres_manag_system`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `competencies`
+-- Table structure for table `competencies`
 --
 
 CREATE TABLE `competencies` (
@@ -38,7 +38,7 @@ CREATE TABLE `competencies` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `competency_blocks`
+-- Table structure for table `competency_blocks`
 --
 
 CREATE TABLE `competency_blocks` (
@@ -52,7 +52,7 @@ CREATE TABLE `competency_blocks` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `failed_jobs`
+-- Table structure for table `failed_jobs`
 --
 
 CREATE TABLE `failed_jobs` (
@@ -68,7 +68,7 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `instructors`
+-- Table structure for table `instructors`
 --
 
 CREATE TABLE `instructors` (
@@ -87,7 +87,7 @@ CREATE TABLE `instructors` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `migrations`
+-- Table structure for table `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -97,7 +97,7 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `migrations`
+-- Dumping data for table `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -115,12 +115,13 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (12, '2021_11_19_000937_create_validate_competencies_table', 1),
 (13, '2021_11_19_001023_create_instructors_table', 1),
 (14, '2021_11_19_001834_create_students_table', 1),
-(15, '2021_11_19_004005_create_sessions_table', 1);
+(15, '2021_11_19_004005_create_sessions_table', 1),
+(16, '2021_11_20_203344_create_routers_ips_table', 2);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `partners`
+-- Table structure for table `partners`
 --
 
 CREATE TABLE `partners` (
@@ -134,7 +135,7 @@ CREATE TABLE `partners` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `partners`
+-- Dumping data for table `partners`
 --
 
 INSERT INTO `partners` (`id`, `name`, `activity_domain`, `address`, `contact`, `created_at`, `updated_at`) VALUES
@@ -144,7 +145,7 @@ INSERT INTO `partners` (`id`, `name`, `activity_domain`, `address`, `contact`, `
 -- --------------------------------------------------------
 
 --
--- Structure de la table `password_resets`
+-- Table structure for table `password_resets`
 --
 
 CREATE TABLE `password_resets` (
@@ -156,7 +157,7 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `personal_access_tokens`
+-- Table structure for table `personal_access_tokens`
 --
 
 CREATE TABLE `personal_access_tokens` (
@@ -174,7 +175,7 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `referentials`
+-- Table structure for table `referentials`
 --
 
 CREATE TABLE `referentials` (
@@ -185,7 +186,7 @@ CREATE TABLE `referentials` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `referentials`
+-- Dumping data for table `referentials`
 --
 
 INSERT INTO `referentials` (`id`, `label`, `created_at`, `updated_at`) VALUES
@@ -196,7 +197,7 @@ INSERT INTO `referentials` (`id`, `label`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `registers`
+-- Table structure for table `registers`
 --
 
 CREATE TABLE `registers` (
@@ -209,10 +210,39 @@ CREATE TABLE `registers` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `registers`
+--
+
+INSERT INTO `registers` (`id`, `id_student`, `dayDate`, `morningSignIn`, `eveningSignIn`, `created_at`, `updated_at`) VALUES
+(1, 4, '2021-11-20', '2021-11-20 21:34:28', '2021-11-20 21:37:26', '2021-11-20 21:34:28', '2021-11-20 21:37:26');
+
 -- --------------------------------------------------------
 
 --
--- Structure de la table `sessions`
+-- Table structure for table `routers_ips`
+--
+
+CREATE TABLE `routers_ips` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `public_address` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `region` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `country` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `routers_ips`
+--
+
+INSERT INTO `routers_ips` (`id`, `public_address`, `region`, `country`, `created_at`, `updated_at`) VALUES
+(1, '160.155.130.215', 'Abidjan', 'CI', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sessions`
 --
 
 CREATE TABLE `sessions` (
@@ -227,7 +257,7 @@ CREATE TABLE `sessions` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `students`
+-- Table structure for table `students`
 --
 
 CREATE TABLE `students` (
@@ -247,10 +277,18 @@ CREATE TABLE `students` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `students`
+--
+
+INSERT INTO `students` (`id`, `id_training`, `firstName`, `lastName`, `birthday`, `sex`, `educationLevel`, `branchOfStudy`, `email`, `address`, `tel`, `parentContact`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Ben Yaya', 'Konante', '2021-11-25', 'M', 'Licence', 'Informatique', 'benkonate56@gmail.com', 'Abidjan-Cocody-Campus', '0777298466', '0786546213', '2021-11-20 07:59:57', '2021-11-20 07:59:57'),
+(2, 1, 'Lebron', 'James', '1999-10-12', 'M', 'Licence', 'Mathématique', 'lebron.james@gmail.com', 'Abidjan-Yopougon-Ananeraie', '0789451250', '0708789875', '2021-11-20 18:25:51', '2021-11-20 18:25:51');
+
 -- --------------------------------------------------------
 
 --
--- Structure de la table `trainings`
+-- Table structure for table `trainings`
 --
 
 CREATE TABLE `trainings` (
@@ -265,7 +303,7 @@ CREATE TABLE `trainings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `trainings`
+-- Dumping data for table `trainings`
 --
 
 INSERT INTO `trainings` (`id`, `id_partner`, `id_referential`, `label`, `beginDate`, `endDate`, `created_at`, `updated_at`) VALUES
@@ -274,35 +312,34 @@ INSERT INTO `trainings` (`id`, `id_partner`, `id_referential`, `label`, `beginDa
 -- --------------------------------------------------------
 
 --
--- Structure de la table `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` enum('admin','student','instructor','null') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'null',
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `two_factor_secret` text COLLATE utf8mb4_unicode_ci,
-  `two_factor_recovery_codes` text COLLATE utf8mb4_unicode_ci,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `current_team_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `profile_photo_path` varchar(2048) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `users`
+-- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
-(1, 'Kevin', 'kevinkone19@gmail.com', NULL, '$2y$10$sOVuxto6y/c/H93nityaV.ahCQ23eGRbgT8n1XaLD0dJnaUe1eqNu', NULL, NULL, NULL, NULL, NULL, '2021-11-19 10:26:07', '2021-11-19 10:26:07');
+INSERT INTO `users` (`id`, `name`, `email`, `type`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Kevin', 'kevinkone19@gmail.com', 'admin', NULL, '$2y$10$sOVuxto6y/c/H93nityaV.ahCQ23eGRbgT8n1XaLD0dJnaUe1eqNu', NULL, '2021-11-19 10:26:07', '2021-11-19 10:26:07'),
+(3, 'Konate', 'benkonate56@gmail.com', 'student', NULL, '$2y$10$hSqkH6MjxzZIRS.3fftqee.2rEQkdBjvas4c7wlV2b2mmnZAzkn4.', NULL, '2021-11-20 07:59:58', '2021-11-20 10:56:53'),
+(4, 'James', 'lebron.james@gmail.com', 'student', NULL, '$2y$10$eTR9LkUOp97KXVt4fyI/fuOVM2qKMlbipYmwkhMyP0xY0ZFKh6zhS', NULL, '2021-11-20 18:25:51', '2021-11-20 19:59:02');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `validate_competencies`
+-- Table structure for table `validate_competencies`
 --
 
 CREATE TABLE `validate_competencies` (
@@ -315,54 +352,54 @@ CREATE TABLE `validate_competencies` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Index pour les tables déchargées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `competencies`
+-- Indexes for table `competencies`
 --
 ALTER TABLE `competencies`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `competency_blocks`
+-- Indexes for table `competency_blocks`
 --
 ALTER TABLE `competency_blocks`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `failed_jobs`
+-- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
--- Index pour la table `instructors`
+-- Indexes for table `instructors`
 --
 ALTER TABLE `instructors`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `migrations`
+-- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `partners`
+-- Indexes for table `partners`
 --
 ALTER TABLE `partners`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `password_resets`
+-- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
--- Index pour la table `personal_access_tokens`
+-- Indexes for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
@@ -370,19 +407,25 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
--- Index pour la table `referentials`
+-- Indexes for table `referentials`
 --
 ALTER TABLE `referentials`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `registers`
+-- Indexes for table `registers`
 --
 ALTER TABLE `registers`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `sessions`
+-- Indexes for table `routers_ips`
+--
+ALTER TABLE `routers_ips`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sessions`
 --
 ALTER TABLE `sessions`
   ADD PRIMARY KEY (`id`),
@@ -390,108 +433,114 @@ ALTER TABLE `sessions`
   ADD KEY `sessions_last_activity_index` (`last_activity`);
 
 --
--- Index pour la table `students`
+-- Indexes for table `students`
 --
 ALTER TABLE `students`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `trainings`
+-- Indexes for table `trainings`
 --
 ALTER TABLE `trainings`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
--- Index pour la table `validate_competencies`
+-- Indexes for table `validate_competencies`
 --
 ALTER TABLE `validate_competencies`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT pour les tables déchargées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `competencies`
+-- AUTO_INCREMENT for table `competencies`
 --
 ALTER TABLE `competencies`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `competency_blocks`
+-- AUTO_INCREMENT for table `competency_blocks`
 --
 ALTER TABLE `competency_blocks`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `failed_jobs`
+-- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `instructors`
+-- AUTO_INCREMENT for table `instructors`
 --
 ALTER TABLE `instructors`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `migrations`
+-- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT pour la table `partners`
+-- AUTO_INCREMENT for table `partners`
 --
 ALTER TABLE `partners`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT pour la table `personal_access_tokens`
+-- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `referentials`
+-- AUTO_INCREMENT for table `referentials`
 --
 ALTER TABLE `referentials`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT pour la table `registers`
+-- AUTO_INCREMENT for table `registers`
 --
 ALTER TABLE `registers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT pour la table `students`
+-- AUTO_INCREMENT for table `routers_ips`
+--
+ALTER TABLE `routers_ips`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT pour la table `trainings`
+-- AUTO_INCREMENT for table `trainings`
 --
 ALTER TABLE `trainings`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT pour la table `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT pour la table `validate_competencies`
+-- AUTO_INCREMENT for table `validate_competencies`
 --
 ALTER TABLE `validate_competencies`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;

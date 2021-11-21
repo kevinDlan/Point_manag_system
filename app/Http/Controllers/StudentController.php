@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Register;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\Training;
@@ -91,5 +92,11 @@ class StudentController extends Controller
        $user->save();
 
        return redirect('home')->with('password_success', 'Mot de passe modifier avec succès !');
+    }
+
+    public function registerList()
+    {
+       $registers = Register::where('id_student',Auth::id())->get();
+       return view('student.register_list')->with(['registers'=>$registers]);
     }
 }
