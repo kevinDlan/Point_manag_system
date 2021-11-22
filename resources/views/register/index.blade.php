@@ -24,7 +24,7 @@
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Adresse E-Mail') }}</label>
                             <div class="col-md-6">
-                                <input placeholder="Entrer votre adresse mail" id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="" required>
+                                <input placeholder="Entrer votre adresse mail" id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" required>
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

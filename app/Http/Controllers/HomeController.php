@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Register;
+use App\Models\Training;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -33,7 +34,8 @@ class HomeController extends Controller
        $presence_lists = DB::select('SELECT firstName,lastName,dayDate,morningSignIn,eveningSignIn 
                                      FROM students,registers,users WHERE registers.id_student=users.id 
                                      AND users.email=students.email');
-       return view('admin.student_presence_list',['presence_lists'=>$presence_lists]);
+       $trains = Training::all(['id', 'label']);
+       return view('admin.student_presence_list',['presence_lists'=>$presence_lists,'trains'=>$trains]);
     }
 
     public function search($date)

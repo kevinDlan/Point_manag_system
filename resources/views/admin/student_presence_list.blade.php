@@ -3,8 +3,18 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="col-md-4 mb-3">
-             <input class="form-control" value="{{date('Y-m-d')}}" type="date" name="user_selected_date" id="selected_date">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                  <input class="form-control" value="{{date('Y-m-d')}}" type="date" name="user_selected_date" id="selected_date">
+                </div>
+                <div class="col-md-6 mb-4">
+                   <select class="form-control" name="training" id="training">
+                       <option selected disabled>--Veuillez choisir une formation--</option>
+                     @foreach ($trains as $train )
+                        <option value="{{$train->id}}">{{$train->label}}</option>  
+                     @endforeach
+                   </select>
+                </div>
             </div>
             <div class="table table-responsive">
                 <table id="table" class="table table-bordered">
@@ -61,6 +71,14 @@
          return data;
        }
 
+    //  Train select
+    $('#training').on('change', e=>
+    {
+        let train = e.target.value;
+        // En cour de développement 
+        alert('En cour de développement');
+    })
+
        var temp = ''
        $('#selected_date').on('change', e => 
        {
@@ -74,6 +92,7 @@
                data.map( d =>{
                 //    <tr><td>d.</td></tr>
                 //    temp += ``; 
+                console.locale(d);
                })
              }else
              {

@@ -35,7 +35,8 @@ class RegisterController extends Controller
         $request->request->add(['country' => $data['country']]);
 
         // $country = $data['country'];
-        $validated = $request->validate([
+        $validated = $request->validate(
+            [
               'email'=>'required|email|exists:users,email',
               'email' => 'required|email|exists:students,email',
               'ip_address'=>'required|ip|exists:routers_ips,public_address',
@@ -88,7 +89,7 @@ class RegisterController extends Controller
             } elseif ($notAuthregister->morningSignIn !== null && $notAuthregister->eveningSignIn !== null) {
                 return redirect('/register_')->with('dayRegisterOver', 'Vous avez déjà pointer 2 fois au cour de cette journnée !');
             } else {
-                $notAuthUpdateRegister = Register::find($notAuthregister->id);
+                $notAuthUpdateRegister = Register::find($notAuthregister->id_student);
                 $notAuthUpdateRegister->eveningSignIn = date('Y-m-d H:i:s');
                 $notAuthUpdateRegister->save();
                 return redirect('/register_')->with('enening_success', 'Pointage du soir effectuer avec succès !');
