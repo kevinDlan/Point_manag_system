@@ -11,7 +11,8 @@
                    <a href="{{route('create-train-ref')}}">Création de référentiel</a><br>
                    <a href="{{route('training')}}">Créer une formation</a><br>
                    <a href="{{route('create-student-form')}}">Enregistrer un Apprenant</a><br>
-                   <a href="{{route('presence-liste')}}">Liste de présence</a>
+                   <a href="{{route('presence-liste')}}">Liste de présence</a><br>
+                   <a href="{{route('student-list')}}">Liste des Apprenant</a><br>
                    @elseif (Auth::user()->type === 'student')
                    <a href="{{route('register-view')}}">Pointer ma présence</a><br>
                    <a href="{{route('register-list')}}">Recap de mes présences</a><br>

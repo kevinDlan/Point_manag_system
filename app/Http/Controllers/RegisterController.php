@@ -101,4 +101,9 @@ class RegisterController extends Controller
     
     }
 
+    public function faceId()
+    {
+        return view('face_id.index');
+    }
+
 }

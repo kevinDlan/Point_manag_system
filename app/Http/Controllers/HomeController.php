@@ -47,4 +47,12 @@ class HomeController extends Controller
                                      AND dayDAte = :dat',['dat'=>$date]);
         return json_encode($presence_lists);
     }
+
+    public function studentList()
+    {
+        $students = DB::select('SELECT firstName,UCASE(lastName) as lastName,birthday,sex,educationLevel,
+                                       email,tel,parentContact,label FROM 
+                                       students,trainings WHERE students.id_training = trainings.id');
+        return view('admin.student_list',['students'=> $students]);
+    }
 }

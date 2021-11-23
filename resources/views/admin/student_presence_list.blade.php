@@ -25,11 +25,29 @@
                          <th>Nom et Prénom</th>
                          <th>Heure Arrivée</th>
                          <th>Heure Départ</th>
+                         <th>Temps passé en salle</th>
                          <th>Etat</th>
                         </tr>
                     </thead>
                     <tbody>
                     @foreach ($presence_lists as $presence_list)
+                        @php
+                          $goodTime = new DateTime('08:30');
+                          $gt = $goodTime->format('H:i');
+                          $arrivedTime = new DateTime($presence_list->morningSignIn);
+                          $at = $arrivedTime->format('H:i');
+
+                          if($presence_list->eveningSignIn !== null)
+                          {
+                            $start_date = new DateTime($presence_list->morningSignIn);
+                            $end_date = new DateTime($presence_list->eveningSignIn);
+                            $diff = $start_date->diff($end_date);
+                            $pass = $diff->format("%H:%I:%S");
+                          }else 
+                          {
+                             $pass = 'Indéterminé';
+                          }
+                        @endphp
                         <tr>
                            <td>{{__('day.'.date('l',strtotime($presence_list->dayDate)))}}</td>
                            <td>{{date('d-m-Y',strtotime($presence_list->dayDate))}}</td>
@@ -37,6 +55,7 @@
                            <td>{{date('H:i',strtotime($presence_list->morningSignIn))}}</td>
                            @if($presence_list->eveningSignIn == null)
                                <td>Encore en salle</td>
+                               <td>{{$pass}}</td>
                                 <td>
                                     {{-- <i class="bi bi-toggle-off"></i> --}}
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="fillCurrentColor" class="bi bi-toggle-off" viewBox="0 0 16 16">
@@ -44,14 +63,15 @@
                                     </svg>
                                 </td>
                            @else
-                               <td>{{date('H:i',strtotime($presence_list->eveningSignIn))}}</td>
+                            <td>{{date('H:i',strtotime($presence_list->eveningSignIn))}}</td>
+                               <td>{{$pass}}</td>
                                 <td>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#6610f2" class="bi bi-toggle-on" viewBox="0 0 16 16">
                                     <path d="M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10H5zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"/>
                                 </svg>
                             </td>
                            @endif
-                       </tr>
+                        </tr>
                     @endforeach
                     </tbody>
                 </table>
