@@ -1,0 +1,3 @@
+ - Gestion de l'affichage de la Map aprés emargement.
+ - Affichage des Rétard sur la liste de présence.
+ 

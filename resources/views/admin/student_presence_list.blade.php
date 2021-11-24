@@ -30,7 +30,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach ($presence_lists as $presence_list)
+                  @if(count($presence_lists) == 0)
+                    <tr><td colspan='7' style='text-align:center;font-weight:bold;'>Aucun Arrivé pour le moment</td></tr>
+                  @else
+                   @foreach ($presence_lists as $presence_list)
                         @php
                           $goodTime = new DateTime('08:30');
                           $gt = $goodTime->format('H:i');
@@ -73,6 +76,7 @@
                            @endif
                         </tr>
                     @endforeach
+                  @endif
                     </tbody>
                 </table>
             </div>
@@ -82,8 +86,6 @@
 @endsection
 @push('script')
     <script type='text/javascript'>
-       moment.locale('fr');
-       console.log(moment('2021-11-20 21:37:26').format('hh:mm'));
        const getSearchData =  async(date)=>
        {
          const resp = await fetch("{{env('BASE_URL')}}search_data_by_date/"+date);
@@ -117,7 +119,7 @@
              }else
              {
                 $('#table').children('tbody').empty();
-                temp = "<tr><td colspan='6' style='text-align:center'>Aucune donnée Trouvé</td></tr>";
+                temp = "<tr><td colspan='7' style='text-align:center;font-weight:bold;color:red;'>Aucune donnée Trouvée</td></tr>";
                 $('#table').children('tbody').append(temp);
              }
            })

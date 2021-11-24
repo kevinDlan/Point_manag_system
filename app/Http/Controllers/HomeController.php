@@ -31,9 +31,10 @@ class HomeController extends Controller
 
     public function presenceList()
     {
+        $date = date('Y-m-d');
        $presence_lists = DB::select('SELECT firstName,lastName,dayDate,morningSignIn,eveningSignIn 
                                      FROM students,registers,users WHERE registers.id_student=users.id 
-                                     AND users.email=students.email');
+                                     AND users.email=students.email AND dayDate =:dat',['dat'=>$date]);
        $trains = Training::all(['id', 'label']);
        return view('admin.student_presence_list',['presence_lists'=>$presence_lists,'trains'=>$trains]);
     }
@@ -44,7 +45,7 @@ class HomeController extends Controller
         $presence_lists = DB::select('SELECT firstName,lastName,dayDate,morningSignIn,eveningSignIn 
                                      FROM students,registers,users WHERE registers.id_student=users.id 
                                      AND users.email=students.email
-                                     AND dayDAte = :dat',['dat'=>$date]);
+                                     AND dayDate = :dat',['dat'=>$date]);
         return json_encode($presence_lists);
     }
 

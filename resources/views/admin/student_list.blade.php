@@ -28,6 +28,7 @@
                             <th>Formation</th>
                             <th>Téléphone</th>
                             <th>Contact Tuteur</th>
+                            {{-- <th>Action</th> --}}
                         </tr>
                     </thead>
                     <tbody>
@@ -41,6 +42,13 @@
                             <td>{{$student->label}}</td>
                             <td>{{$student->tel}}</td>
                             <td>{{$student->parentContact}}</td>
+                            {{-- <td>
+                                <div class="row ml-1">
+                                    <a href=""><i class="bi bi-trash"></i></a>
+                                    <a href=""><i class="bi bi-trash"></i></a>
+                                    <a href=""><i class="bi bi-trash"></i></a>
+                                </div>
+                            </td> --}}
                         </tr>
                     @endforeach
                     </tbody>

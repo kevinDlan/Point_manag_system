@@ -43,3 +43,5 @@ Route::get('register_list',[App\Http\Controllers\StudentController::class,'regis
 Route::get('/presence_list',[App\Http\Controllers\HomeController::class,'presenceList'])->name('presence-liste');
 Route::get('/search_data_by_date/{date}',[App\Http\Controllers\HomeController::class, 'search'])->name('fetch-date-data');
 Route::get('/student_list',[App\Http\Controllers\HomeController::class, 'studentList'])->name('student-list');
+Route::get('/create_instructor', [App\Http\Controllers\InstructorController::class, 'index'])->name('create-instructor-form');
+Route::post('/save_instructor',[App\Http\Controllers\InstructorController::class, 'store'])->name('save-instructor');

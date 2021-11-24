@@ -19,6 +19,7 @@ class CreateInstructorsTable extends Migration
             $table->string('firstName', 255);
             $table->string('lastName', 255);
             $table->date('birthDay');
+            $table->enum('sex',['M','F']);
             $table->string('email', 255);
             $table->string('address', 255);
             $table->string('tel', 255);

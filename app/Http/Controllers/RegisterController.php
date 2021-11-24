@@ -78,7 +78,8 @@ class RegisterController extends Controller
                                 ->where('id_student', $userId->id)
                                 ->where('dayDate', date('Y-m-d'))
                                 ->first();
-            if ($notAuthregister === null) {
+            if ($notAuthregister === null) 
+            {
                 // Create new day appointment
                 $newNotAuthRegister = new Register();
                 $newNotAuthRegister->id_student = $userId->id;
@@ -86,12 +87,14 @@ class RegisterController extends Controller
                 $newNotAuthRegister->morningSignIn = date('Y-m-d H:i:s');
                 $newNotAuthRegister->save();
                 return redirect('/register_')->with('morning_success', 'Pointage du matin effectuer avec succès !');
-            } elseif ($notAuthregister->morningSignIn !== null && $notAuthregister->eveningSignIn !== null) {
+            } elseif ($notAuthregister->morningSignIn !== null && $notAuthregister->eveningSignIn !== null)
+            {
                 return redirect('/register_')->with('dayRegisterOver', 'Vous avez déjà pointer 2 fois au cour de cette journnée !');
-            } else {
-                $notAuthUpdateRegister = Register::find($notAuthregister->id_student);
-                $notAuthUpdateRegister->eveningSignIn = date('Y-m-d H:i:s');
-                $notAuthUpdateRegister->save();
+            } else
+            {
+                Register::where('id_student',$notAuthregister->id_student)
+                        ->where('dayDate',date('Y-m-d'))
+                        ->update(['eveningSignIn' => date('Y-m-d H:i:s')]);
                 return redirect('/register_')->with('enening_success', 'Pointage du soir effectuer avec succès !');
             }
             

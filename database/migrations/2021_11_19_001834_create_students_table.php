@@ -19,6 +19,7 @@ class CreateStudentsTable extends Migration
             $table->string('firstName', 255);
             $table->string('lastName', 255);
             $table->date('birthday');
+            $table->enum('sex',['M','F']);
             $table->string('educationLevel', 255);
             $table->string('branchOfStudy', 255);
             $table->string('email', 255);
