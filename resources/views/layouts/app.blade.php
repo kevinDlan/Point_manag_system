@@ -19,8 +19,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     {{-- Sweet Alert --}}
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    {{-- moment JS --}}
-    {{-- <script src="{{asset('js/moment.js')}}"></script> --}}
+    <style>
+        canvas 
+        {
+        position: absolute;
+        }
+    </style>
+    {{-- Map --}}
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
 </head>
 <body>
     <div id="app">
@@ -45,11 +52,11 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link" href="{{ route('face-login') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
 
-                            @if (Route::has('route_name'))
+                            @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
@@ -87,16 +94,10 @@
                 </div>
             </div>
         </nav>
-
         <main class="py-4">
             @yield('content')
         </main>
     </div>
-    {{-- <footer>
-        <div class="justify-content-center">
-            <i class="fas fa-copyright"></i>{{date('Y')}}
-        </div>
-    </footer> --}}
 @stack('script')
 </body>
 </html>

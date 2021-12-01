@@ -45,3 +45,6 @@ Route::get('/search_data_by_date/{date}',[App\Http\Controllers\HomeController::c
 Route::get('/student_list',[App\Http\Controllers\HomeController::class, 'studentList'])->name('student-list');
 Route::get('/create_instructor', [App\Http\Controllers\InstructorController::class, 'index'])->name('create-instructor-form');
 Route::post('/save_instructor',[App\Http\Controllers\InstructorController::class, 'store'])->name('save-instructor');
+Route::get('/search_student_by_train/{id}', [App\Http\Controllers\HomeController::class, 'getStudentByTraining']);
+Route::post('/mail_verif',[App\Http\Controllers\EmailVerifController::class,'verifEmail'])->name('mail-verif');
+Route::get('/face_login_verif',[App\Http\Controllers\EmailVerifController::class,'index'])->name('face-login');

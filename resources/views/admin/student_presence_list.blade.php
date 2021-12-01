@@ -97,27 +97,38 @@
     $('#training').on('change', e=>
     {
         let train = e.target.value;
-        // En cour de développement 
-        alert('En cour de développement');
+        let date = $('#selected_date').val();
+        get
     })
-
        var temp = ''
+       var weekdays = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
        $('#selected_date').on('change', e => 
        {
-           let date = e.target.value;
-        //    alert(date);
-           getSearchData(date)
+           getSearchData(e.target.value)
            .then((data) => {
              if(data.length > 0)
              {
+               temp = '';
                $('#table').children('tbody').empty();
                data.map( d =>{
-                //    <tr><td>d.</td></tr>
-                //    temp += ``; 
-                console.locale(d);
-               })
+                   let day = new Date(d.dayDate);
+                   let arriveTime = new Date(d.morningSignIn) ;
+                   let leaveTime = new Date(d.eveningSignIn);
+                   let dd = new Date(d.dayDate)
+                   temp += `<tr>
+                                <td>${weekdays[day.getDay()-1]}</td>
+                                <td>${dd.getDate()}-${dd.getMonth()}-${dd.getFullYear()}</td>
+                                <td>${d.lastName} ${d.firstName}</td>
+                                <td>${arriveTime.getHours()}:${arriveTime.getMinutes()}</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>`; 
+               });
+               $('#table').children('tbody').append(temp);
              }else
              {
+                temp ='';
                 $('#table').children('tbody').empty();
                 temp = "<tr><td colspan='7' style='text-align:center;font-weight:bold;color:red;'>Aucune donnée Trouvée</td></tr>";
                 $('#table').children('tbody').append(temp);

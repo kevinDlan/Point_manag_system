@@ -13,7 +13,8 @@
                    <a href="{{route('create-student-form')}}">Enregistrer un Apprenant</a><br>
                    <a href="{{route('create-instructor-form')}}">Ajouter un formateur</a><br>
                    <a href="{{route('presence-liste')}}">Liste de présence</a><br>
-                   <a href="{{route('student-list')}}">Liste des Apprenant</a><br>
+                   <a href="{{route('student-list')}}">Liste des Apprenants</a><br>
+                   {{-- <a href="{{route('add-ipaddress')}}">Enregistrer nouvel adresse IP</a><br> --}}
                    @elseif (Auth::user()->type === 'student')
                    <a href="{{route('register-view')}}">Pointer ma présence</a><br>
                    <a href="{{route('register-list')}}">Recap de mes présences</a><br>
@@ -25,9 +26,14 @@
             </div>
         </div>
     </div>
+    @if(Auth::user()->type === 'student')
+       <div class="row justify-content-center mt-3">
+           <div id="map" style='height:350px;' class="col-md-8"></div>
+       </div>
+    @endif
 </div>
 @endsection
-@push('js')
+@push('script')
 <script type="text/javascript">
     @if(session('password_success'))
         Swal.fire(
@@ -53,5 +59,24 @@
             '',
             'info');
     @endif
+
+    // Map script
+        @if(Auth::user()->type === 'student')
+               var locate = [-4.0017,5.3544]
+               mapboxgl.accessToken = 'pk.eyJ1Ijoia2V2aW5rb25lIiwiYSI6ImNrdzJ4czBwNzAybmQyeW1lYWV2NTdkM2oifQ.2WHo3ir6OpxN4YFLi5U7sg';
+               const map = new mapboxgl.Map({
+               container: 'map', // container ID
+               style: 'mapbox://styles/mapbox/dark-v10', // style URL
+               center:locate, // starting position [lng, lat]
+               zoom: 14 // starting zoom
+              });
+              const marker = new mapboxgl.Marker()
+                .setLngLat(locate)
+                .addTo(map);
+            //   const popup = new mapboxgl.Popup()
+            //     .setLngLat(locate)
+            //     .setText('MTN ACADEMY')
+            //     .addTo(map);
+        @endif
 </script>
 @endpush

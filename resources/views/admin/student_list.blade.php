@@ -1,20 +1,18 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
+        <h1 class="text-center font-weight-bold">Liste des Apprenants</h1>
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="row">
-                <div class="col-md-4 mb-3">
-                  <input class="form-control" value="{{date('Y-m-d')}}" type="date" name="user_selected_date" id="selected_date">
-                </div>
-                {{-- <div class="col-md-6 mb-4">
+                <div class="col-md-3 mb-1">
                    <select class="form-control" name="training" id="training">
                        <option selected disabled>--Veuillez choisir une formation--</option>
                      @foreach ($trains as $train )
                         <option value="{{$train->id}}">{{$train->label}}</option>  
                      @endforeach
                    </select>
-                </div> --}}
+                </div>
             </div>
             <div class="table table-responsive">
                 <table id="table" class="table table-bordered">
@@ -58,3 +56,50 @@
     </div>
 </div>
 @endsection
+@push('script')
+    <script>
+    const getStudentListByTraining =  async(train_id)=>
+       {
+         const resp = await fetch("{{env('BASE_URL')}}search_student_by_train/"+train_id);
+         const data = resp.json();
+         return data;
+       }
+        var template = '';
+        $('#training').on('change', (e)=>
+        {
+           getStudentListByTraining(e.target.value)
+           .then( data => 
+           {
+              if(data.length > 0)
+              {
+                template = '';
+                $('#table').children('tbody').empty();
+                data.map( dt => 
+                {
+                  template +=`
+                  <tr>
+                    <td class="fw-bold">${dt.lastName} ${dt.firstName}</td>
+                    <td>${dt.birthday}</td>
+                    <td>${dt.sex == 'M' ? 'Homme': 'Femme'}</td>
+                    <td>${dt.educationLevel}</td>
+                    <td>${dt.email}</td>
+                    <td>${dt.label}</td>
+                    <td>${dt.tel}</td>
+                    <td>${dt.parentContact}</td>
+                </tr>`;
+                });
+                $('#table').children('tbody').append(template);
+              }else
+              {
+                template = '';
+                $('#table').children('tbody').empty();
+                template = "<tr><td colspan='8' style='text-align:center;font-weight:bold;color:red;'>Aucun Apprenant inscrit a cette formation !</td></tr>";
+                $('#table').children('tbody').append(template);
+              }
+           })
+           .catch(error => {
+               console.log(error);
+           })
+        })
+    </script>
+@endpush

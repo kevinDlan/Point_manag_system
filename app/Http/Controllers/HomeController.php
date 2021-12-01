@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Register;
+use App\Models\Student;
 use App\Models\Training;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -54,6 +55,15 @@ class HomeController extends Controller
         $students = DB::select('SELECT firstName,UCASE(lastName) as lastName,birthday,sex,educationLevel,
                                        email,tel,parentContact,label FROM 
                                        students,trainings WHERE students.id_training = trainings.id');
-        return view('admin.student_list',['students'=> $students]);
+        $trains = Training::all();
+        return view('admin.student_list',['students'=> $students,'trains'=>$trains]);
+    }
+
+    public function getStudentByTraining($id)
+    {
+        $students = DB::select('SELECT firstName,UCASE(lastName) as lastName,birthday,sex,educationLevel,
+                                       email,tel,parentContact,label FROM 
+                                       students,trainings WHERE students.id_training = :id AND students.id_training = trainings.id',['id'=>$id]);
+        return json_encode($students);
     }
 }

@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
+    <h1 class="text-center font-weight-bold">Liste de mes présences</h1>
     <div class="row justify-content-center">
         <div class="col-md-8">
-            
             <div class="table table-responsive">
                 <table class="table table-bordered">
                     <thead style="background-color: #6610f2">
