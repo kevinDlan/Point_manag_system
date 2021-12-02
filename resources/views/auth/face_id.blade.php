@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-header">{{ __('Face ID Authenticate') }}</div>
                 <div class="card-body" id="videoContent">
-                    <img id="user" src="{{asset('img/you.jpg')}}" style="display: none;" />
+                    <img id="user" src="{{asset('img/students_pictures/'.Auth::img_name())}}" style="display: none;" />
                     <video id="video" width="300" height="300" autoplay muted></video>
                     <canvas id='canvas' height="300" width="300"></canvas>
                 </div>

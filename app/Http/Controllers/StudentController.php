@@ -79,19 +79,27 @@ class StudentController extends Controller
 
     public function modif_password(Request $request)
     {
-       $validated = $request->validate([
+       $request->validate([
            'email'=>'required|exists:users,email',
            'old_password' => 'required|min:8',
            'new_password' => 'required|min:8',
+           'image' => 'required|image|mimes:png,jpg,jpeg',
        ]);
 
-
-       $user = User::find(Auth::id());
-
+       $id = Auth::id();
+       $file = $request->file('image');
+       $fileName = $id.'.'.$file->getClientOriginalExtension();
+       $destPath = public_path(). '/img/students_pictures';
+       
+       $user = User::find($id);
+       $user->img_name = $fileName;
        $user->password = Hash::make($request->new_password);
        $user->save();
 
-       return redirect('home')->with('password_success', 'Mot de passe modifier avec succès !');
+        //Move file
+        $file->move($destPath, $fileName);
+
+        return redirect('home')->with('password_success', 'Mot de passe modifier avec succès !');
     }
 
     public function registerList()

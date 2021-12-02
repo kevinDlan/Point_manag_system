@@ -14,11 +14,11 @@
 
                             <div class="col-md-6">
                                 <input id="email" type="email"  
-                                @isset($email)
+                                {{-- @isset($email)
                                   readonly
                                   value="{{$email}}"
-                                @endisset
-                                @if(session('email') !== null)
+                                @endisset --}}
+                                @if(session('email'))
                                   readonly
                                   value="{{session('email')}}"
                                 @endif

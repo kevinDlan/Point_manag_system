@@ -29,7 +29,8 @@ class EmailVerifController extends Controller
        }else
        {
           $email = $request->email;
-          return view('auth.login',['email'=>$email]);
+         //  return view('auth.login',['email'=>$email]);
+          return redirect('login')->with(['email'=>$email]);
        }
     }
 }
