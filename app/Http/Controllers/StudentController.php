@@ -9,6 +9,9 @@ use App\Models\Training;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AccountCreateMail;
+
 
 class StudentController extends Controller
 {
@@ -37,8 +40,8 @@ class StudentController extends Controller
             'sex' => 'required',
             'education_level' => 'required|string',
             'study_domain'=>'required|string',
-            'email'=>'required|email|unique:users,email',
-            'email' => 'required|email|unique:students,email',
+            // 'email'=>'required|email|unique:users,email',
+            // 'email' => 'required|email|unique:students,email',
             'address'=>'required|string',
             'tel'=>'required|max:10',
             'parent_tel'=>'required|max:10'
@@ -56,19 +59,21 @@ class StudentController extends Controller
         $student->address = $request->address;
         $student->tel = $request->tel;
         $student->parentContact = $request->parent_tel;
-        $student->save();
+        // $student->save();
 
         // Create student account
-        User::create([
-            'name' => $request->last_name,
-            'email' => $request->email,
-            'password' => Hash::make($request->tel),
-            'type' => 'student'
-        ]);
+        // User::create([
+        //     'name' => $request->last_name,
+        //     'email' => $request->email,
+        //     'password' => Hash::make($request->tel),
+        //     'type' => 'student'
+        // ]);
         
         // Send mail to user
+        Mail::to($request->email)->send(new AccountCreateMail());
 
-        return redirect('create_student')->with('message', 'L\'apprenant à été ajouter avec succès !');
+        // Redirect after
+        return redirect('create_student')->with('message', 'L\'apprenant à été ajouter avec succès et mail envoyer !');
 
     }
 
@@ -89,7 +94,7 @@ class StudentController extends Controller
        $id = Auth::id();
        $file = $request->file('image');
        $fileName = $id.'.'.$file->getClientOriginalExtension();
-       $destPath = public_path(). '/img/students_pictures';
+      //$destPath = public_path(). '/img/students_pictures';
        
        $user = User::find($id);
        $user->img_name = $fileName;
@@ -97,14 +102,17 @@ class StudentController extends Controller
        $user->save();
 
         //Move file
-        $file->move($destPath, $fileName);
+        // $file->move($destPath, $fileName);
+        $file->store(public_path() . '/img/students_pictures');
 
         return redirect('home')->with('password_success', 'Mot de passe modifier avec succès !');
     }
 
     public function registerList()
     {
-       $registers = Register::where('id_student',Auth::id())->get();
+       $registers = Register::where('id_student',Auth::id())
+                                   ->orderBy('dayDate','desc')
+                                   ->get();
        return view('student.register_list')->with(['registers'=>$registers]);
     }
 }

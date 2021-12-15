@@ -7,10 +7,15 @@ use App\Models\Training;
 use App\Models\Instructor;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class InstructorController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth'); 
+    }
 
     public function index()
     {
@@ -58,7 +63,10 @@ class InstructorController extends Controller
 
     public function getInstructorList()
     {
-      
+        $instructors = DB::select('SELECT firstName,UCASE(lastName) as lastName,birthDay,sex,
+                                       email,tel,address,label FROM 
+                                       instructors,trainings WHERE instructors.id_training = trainings.id');
+        return view('instructor.list', ['instructors' => $instructors]);
     }
 
     public function update($id){

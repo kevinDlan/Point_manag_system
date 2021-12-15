@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('title')
+Accueil
+@endsection
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -13,7 +16,13 @@
                    <a href="{{route('create-student-form')}}">Enregistrer un Apprenant</a><br>
                    <a href="{{route('create-instructor-form')}}">Ajouter un formateur</a><br>
                    <a href="{{route('presence-liste')}}">Liste de présence</a><br>
+                   <a href="{{route('bilan')}}">Bilan (Présence-Abscence)</a><br>
                    <a href="{{route('student-list')}}">Liste des Apprenants</a><br>
+                   <a href="{{route('instructor-list')}}">Liste des Formateurs</a><br>
+                   @elseif(Auth::user()->type === 'instructor')
+                   <a href="{{route('student-list')}}">Liste des Apprenants</a><br>
+                   <a href="{{route('instructor-list')}}">Liste des Formateurs</a><br>
+                   <a href="{{route('presence-liste')}}">Liste de présence</a><br>
                    {{-- <a href="{{route('add-ipaddress')}}">Enregistrer nouvel adresse IP</a><br> --}}
                    @elseif (Auth::user()->type === 'student')
                    <a href="{{route('register-view')}}">Pointer ma présence</a><br>
@@ -61,8 +70,10 @@
     @endif
 
     // Map script
+    // fecth data from 
         @if(Auth::user()->type === 'student')
-               var locate = [-4.0017,5.3544]
+            //    var locate = [-4.0017,5.3544]
+               var locate = [-4.010581394224859,5.351321748048184]
                mapboxgl.accessToken = 'pk.eyJ1Ijoia2V2aW5rb25lIiwiYSI6ImNrdzJ4czBwNzAybmQyeW1lYWV2NTdkM2oifQ.2WHo3ir6OpxN4YFLi5U7sg';
                const map = new mapboxgl.Map({
                container: 'map', // container ID

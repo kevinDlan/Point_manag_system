@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c5b73df1713953c4a292ba76ff4cc12c",
+    "content-hash": "13bafe7aafadb968d1cb01b1452151a9",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -957,139 +957,6 @@
                 }
             ],
             "time": "2021-10-06T17:43:30+00:00"
-        },
-        {
-            "name": "ipinfo/ipinfo",
-            "version": "v2.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ipinfo/php.git",
-                "reference": "b8bee1b51490053333232ee9395d3fa982f10872"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ipinfo/php/zipball/b8bee1b51490053333232ee9395d3fa982f10872",
-                "reference": "b8bee1b51490053333232ee9395d3fa982f10872",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "guzzlehttp/guzzle": "^6.3||^7.0",
-                "php": ">=7.3",
-                "sabre/cache": "^1.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": ">=8 <10",
-                "squizlabs/php_codesniffer": "^3.5.8"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.3-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "ipinfo\\ipinfo\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "James Timmins",
-                    "email": "jameshtimmins@gmail.com",
-                    "homepage": "https://github.com/jhtimmins",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Uman Shahzad",
-                    "email": "uman@mslm.io",
-                    "homepage": "https://github.com/UmanShahzad",
-                    "role": "Developer"
-                }
-            ],
-            "description": "The official PHP library for IPinfo, the most reliable, accurate, and in-depth source of IP address data available anywhere. We process terabytes of data to produce our custom IP geolocation, company, carrier and IP type data sets. Visit our developer docs at https://ipinfo.io/developers.",
-            "homepage": "https://github.com/ipinfo/php",
-            "keywords": [
-                "ipinfo"
-            ],
-            "support": {
-                "issues": "https://github.com/ipinfo/php/issues",
-                "source": "https://github.com/ipinfo/php/tree/v2.3.0"
-            },
-            "time": "2021-09-21T05:52:12+00:00"
-        },
-        {
-            "name": "ipinfo/ipinfolaravel",
-            "version": "v2.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ipinfo/laravel.git",
-                "reference": "0d94570b180b5e8c45664d25615d9d65451b60f1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ipinfo/laravel/zipball/0d94570b180b5e8c45664d25615d9d65451b60f1",
-                "reference": "0d94570b180b5e8c45664d25615d9d65451b60f1",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": ">=5, <9",
-                "ipinfo/ipinfo": "^2.1.1"
-            },
-            "require-dev": {
-                "mockery/mockery": "^1.4.2",
-                "orchestra/testbench": "^6.4.0",
-                "phpunit/phpunit": ">=8 <10",
-                "sempro/phpunit-pretty-print": "^1.3.0",
-                "squizlabs/php_codesniffer": "^3.5.8"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "ipinfo\\ipinfolaravel\\ipinfolaravelServiceProvider"
-                    ],
-                    "aliases": {
-                        "ipinfolaravel": "ipinfo\\ipinfolaravel\\Facades\\ipinfolaravel"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "ipinfo\\ipinfolaravel\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "James Timmins",
-                    "email": "jameshtimmins@gmail.com",
-                    "homepage": "https://www.ipinfo.io"
-                },
-                {
-                    "name": "Uman Shahzad",
-                    "email": "uman@mslm.io",
-                    "homepage": "https://github.com/UmanShahzad"
-                }
-            ],
-            "description": "The official Laravel library for IPinfo, the most reliable, accurate, and in-depth source of IP address data available anywhere. We process terabytes of data to produce our custom IP geolocation, company, carrier and IP type data sets. Visit our developer docs at https://ipinfo.io/developers.",
-            "homepage": "https://github.com/ipinfo/ipinfolaravel",
-            "keywords": [
-                "ipinfolaravel",
-                "laravel"
-            ],
-            "support": {
-                "issues": "https://github.com/ipinfo/laravel/issues",
-                "source": "https://github.com/ipinfo/laravel/tree/v2.2.0"
-            },
-            "time": "2021-11-19T05:51:55+00:00"
         },
         {
             "name": "laravel/framework",
@@ -3040,69 +2907,6 @@
                 }
             ],
             "time": "2021-09-25T23:10:38+00:00"
-        },
-        {
-            "name": "sabre/cache",
-            "version": "1.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sabre-io/cache.git",
-                "reference": "70ffff53eaf873300af836fbcf0440b44cdcc798"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sabre-io/cache/zipball/70ffff53eaf873300af836fbcf0440b44cdcc798",
-                "reference": "70ffff53eaf873300af836fbcf0440b44cdcc798",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.1 || ^8.0",
-                "psr/simple-cache": "^1.0"
-            },
-            "provide": {
-                "psr/simple-cache-implementation": "~1.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "~2.16.1",
-                "phpstan/phpstan": "^0.12",
-                "phpunit/phpunit": "^7.5 || ^8.5 || ^9.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Sabre\\Cache\\": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Evert Pot",
-                    "email": "me@evertpot.com",
-                    "homepage": "https://evertpot.com/",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Simple cache abstraction layer implementing PSR-16",
-            "homepage": "http://sabre.io/dav/",
-            "keywords": [
-                "apc",
-                "apcu",
-                "cache",
-                "memcache",
-                "memcached",
-                "psr-16",
-                "sabre",
-                "simple-cache"
-            ],
-            "support": {
-                "forum": "https://groups.google.com/group/sabredav-discuss",
-                "issues": "https://github.com/sabre-io/cache/issues",
-                "source": "https://github.com/fruux/sabre-skel"
-            },
-            "time": "2020-10-03T16:41:24+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

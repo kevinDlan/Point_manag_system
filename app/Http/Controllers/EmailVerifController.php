@@ -16,7 +16,7 @@ class EmailVerifController extends Controller
 
     public function verifEmail(Request $request)
     {
-       $validation = $request->validate([
+      $request->validate([
         'email'=>'required|exists:users,email'
        ]);
        
@@ -24,7 +24,7 @@ class EmailVerifController extends Controller
 
        if($userCredential->type == 'student')
        {
-          session(['email'=>$request->email]);
+          session(['email'=>$request->email,'img_path'=>$userCredential->img_name]);
           return view('auth.face_id');
        }else
        {

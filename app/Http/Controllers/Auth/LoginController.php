@@ -38,7 +38,11 @@ class LoginController extends Controller
     {
         if(session('email'))
         {
-            session('email')->forget();
+            session('email')->forget('email');
+        }
+        if(session('img_path'))
+        {
+            session('img_path')->forget('img_path');
         }
         $this->middleware('guest')->except('logout');
     }

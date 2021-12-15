@@ -1,9 +1,21 @@
 @extends('layouts.app')
+@section('title')
+Liste Apprenant
+@endsection
 @section('content')
 <div class="container">
         <h1 class="text-center font-weight-bold">Liste des Apprenants</h1>
     <div class="row justify-content-center">
         <div class="col-md-12">
+            @if(Auth::user()->type === "instructor")
+              <div class="row">
+                <div class="col-md-3 mb-1">
+                   <select aria-readonly class="form-control" name="training" id="training">
+                        <option value="{{$train->id}}">{{$train->label}}</option>  
+                   </select>
+                </div>
+            </div>
+            @else
             <div class="row">
                 <div class="col-md-3 mb-1">
                    <select class="form-control" name="training" id="training">
@@ -14,6 +26,7 @@
                    </select>
                 </div>
             </div>
+            @endif
             <div class="table table-responsive">
                 <table id="table" class="table table-bordered">
                     <thead style="background-color: #6610f2">
@@ -30,25 +43,29 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach ($students as $student)
-                        <tr>
-                            <td class="fw-bold">{{$student->lastName}} {{$student->firstName}}</td>
-                            <td>{{date('d-m-Y',strtotime($student->birthday))}}</td>
-                            <td>{{$student->sex == 'M' ? 'Homme' : 'Femme'}}</td>
-                            <td>{{$student->educationLevel}}</td>
-                            <td>{{$student->email}}</td>
-                            <td>{{$student->label}}</td>
-                            <td>{{$student->tel}}</td>
-                            <td>{{$student->parentContact}}</td>
-                            {{-- <td>
-                                <div class="row ml-1">
-                                    <a href=""><i class="bi bi-trash"></i></a>
-                                    <a href=""><i class="bi bi-trash"></i></a>
-                                    <a href=""><i class="bi bi-trash"></i></a>
-                                </div>
-                            </td> --}}
-                        </tr>
-                    @endforeach
+                    @if(count($students)==0)
+                        <tr><td colspan='8' style='text-align:center;font-weight:bold;'>Aucun Apprenant inscrit à cette</td></tr>
+                    @else
+                        @foreach ($students as $student)
+                            <tr>
+                                <td class="fw-bold">{{$student->lastName}} {{$student->firstName}}</td>
+                                <td>{{date('d-m-Y',strtotime($student->birthday))}}</td>
+                                <td>{{$student->sex == 'M' ? 'Homme' : 'Femme'}}</td>
+                                <td>{{$student->educationLevel}}</td>
+                                <td>{{$student->email}}</td>
+                                <td>{{$student->label}}</td>
+                                <td>{{$student->tel}}</td>
+                                <td>{{$student->parentContact}}</td>
+                                {{-- <td>
+                                    <div class="row ml-1">
+                                        <a href=""><i class="bi bi-trash"></i></a>
+                                        <a href=""><i class="bi bi-trash"></i></a>
+                                        <a href=""><i class="bi bi-trash"></i></a>
+                                    </div>
+                                </td> --}}
+                            </tr>
+                        @endforeach
+                    @endif
                     </tbody>
                 </table>
             </div>

@@ -47,15 +47,16 @@ class RegisterController extends Controller
         // Check if user is auth
         if(Auth::id() != null)
         {
+           $studentId = Student::select('id')->where('email', $request->email)->first();
            $register = Register::select('id','id_student','dayDate','morningSignIn','eveningSignIn')
-                               ->where('id_student',Auth::id())
+                               ->where('id_student',$studentId->id)
                                ->where('dayDate',date('Y-m-d'))
                                ->first();
             if($register === null)
             {
                 // Create new day appointment
                 $newRegister = new Register();
-                $newRegister->id_student = Auth::id();
+                $newRegister->id_student = $studentId->id;
                 $newRegister->dayDate = date('Y-m-d');
                 $newRegister->morningSignIn = date('Y-m-d H:i:s');
                 $newRegister->save();
@@ -73,16 +74,16 @@ class RegisterController extends Controller
                return redirect('home')->with('enening_success','Pointage du soir effectuer avec succès !');
             }
         }else{
-            $userId = User::select('id')->where('email',$request->email)->first();
+            $studentId = Student::select('id')->where('email',$request->email)->first();
             $notAuthregister = Register::select('id_student', 'dayDate', 'morningSignIn', 'eveningSignIn')
-                                ->where('id_student', $userId->id)
+                                ->where('id_student', $studentId->id)
                                 ->where('dayDate', date('Y-m-d'))
                                 ->first();
             if ($notAuthregister === null) 
             {
                 // Create new day appointment
                 $newNotAuthRegister = new Register();
-                $newNotAuthRegister->id_student = $userId->id;
+                $newNotAuthRegister->id_student = $studentId->id;
                 $newNotAuthRegister->dayDate = date('Y-m-d');
                 $newNotAuthRegister->morningSignIn = date('Y-m-d H:i:s');
                 $newNotAuthRegister->save();

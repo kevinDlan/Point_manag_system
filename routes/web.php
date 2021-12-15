@@ -48,3 +48,5 @@ Route::post('/save_instructor',[App\Http\Controllers\InstructorController::class
 Route::get('/search_student_by_train/{id}', [App\Http\Controllers\HomeController::class, 'getStudentByTraining']);
 Route::post('/mail_verif',[App\Http\Controllers\EmailVerifController::class,'verifEmail'])->name('mail-verif');
 Route::get('/face_login_verif',[App\Http\Controllers\EmailVerifController::class,'index'])->name('face-login');
+Route::get('/instructor_list',[App\Http\Controllers\InstructorController::class,'getInstructorList'])->name('instructor-list');
+Route::get('/bilan',[App\Http\Controllers\HomeController::class,'bilan'])->name('bilan');

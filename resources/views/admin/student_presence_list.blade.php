@@ -1,13 +1,17 @@
 @extends('layouts.app')
+@section('title')
+Liste Présence
+@endsection
 @section('content')
 <div class="container">
+    <h3 class="text-center font-weight-bold mb-3">Liste de Présence du {{date('d-m-Y')}}</h3>
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="row">
-                <div class="col-md-4 mb-3">
+        <div class="col-md-10">
+            <div class="row mb-1">
+                <div class="col-md-3">
                   <input class="form-control" value="{{date('Y-m-d')}}" type="date" name="user_selected_date" id="selected_date">
                 </div>
-                <div class="col-md-6 mb-4">
+                <div class="col-md-4">
                    <select class="form-control" name="training" id="training">
                        <option selected disabled>--Veuillez choisir une formation--</option>
                      @foreach ($trains as $train )
@@ -35,10 +39,17 @@
                   @else
                    @foreach ($presence_lists as $presence_list)
                         @php
-                          $goodTime = new DateTime('08:30');
-                          $gt = $goodTime->format('H:i');
+                          function convertTimeToMin($time)
+                          {
+                             $time = explode(':', $time);
+                             return ($time[0]*60) + ($time[1]);
+                          }
+                          $goodTimeMin = convertTimeToMin('08:30');
                           $arrivedTime = new DateTime($presence_list->morningSignIn);
                           $at = $arrivedTime->format('H:i');
+                          $arrivedTimeMin = convertTimeToMin($at);
+                          
+                          $diffMin = ($goodTimeMin - $arrivedTimeMin);
 
                           if($presence_list->eveningSignIn !== null)
                           {
@@ -51,7 +62,7 @@
                              $pass = 'Indéterminé';
                           }
                         @endphp
-                        <tr>
+                        <tr class="{{$diffMin<0 ? 'table-danger' : null}}">
                            <td>{{__('day.'.date('l',strtotime($presence_list->dayDate)))}}</td>
                            <td>{{date('d-m-Y',strtotime($presence_list->dayDate))}}</td>
                            <td>{{$presence_list->lastName}} {{$presence_list->firstName}}</td>
