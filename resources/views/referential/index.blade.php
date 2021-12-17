@@ -11,7 +11,7 @@
             <div class="card">
                 <div class="card-header">{{ __('Creation de Réferentiel de formation')}}</div>
                 <div class="card-body">
-                   <form method="POST" action="{{ route('save-referential') }}">
+                   <form method="POST" action="{{ route('referentials.store') }}">
                         @csrf
                         <div class="form-group row">
                             <label for="ref_name" class="col-md-4 col-form-label text-md-right">{{ __('Libellé du reférentiel') }}</label>

@@ -1,6 +1,6 @@
 - Ajouter un footer
--Calculer les heures d'absence de chaque apprenant
--Calculer le pourcentage d'absence
+- Gestion du RUD de toute les resources.
+- Recherche d'un Apprenant
 -Envoie de mail après creation du compte de l'apprenant
   et du formateur avec les accès par default.
 -Gestion des permission (Super admin,admin,formateur,Delegué,Apprenant)

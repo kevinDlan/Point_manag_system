@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\PartnerController;
+use App\Http\Controllers\ReferentialController;
 use App\Http\Controllers\RoutersIpController;
+use App\Http\Controllers\TrainingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,9 +31,6 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/create_traning',[App\Http\Controllers\TrainingController::class, 'index'])->name('training');
 Route::get('/add_partner',[App\Http\Controllers\PartnerController::class,'index'])->name('create-partner-form');
-Route::post('/save_partner', [App\Http\Controllers\PartnerController::class, 'create'])->name('save-partner');
-Route::get('/create_ref',[App\Http\Controllers\ReferentialController::class, 'index'])->name('create-train-ref');
-Route::post('/save_ref',[App\Http\Controllers\ReferentialController::class, 'create'])->name('save-referential');
 Route::post('/create_training',[App\Http\Controllers\TrainingController::class, 'create'])->name('save-training');
 Route::get('/create_student',[App\Http\Controllers\StudentController::class, 'index'])->name('create-student-form');
 Route::post('/save_student', [App\Http\Controllers\StudentController::class, 'create'])->name('save-student');
@@ -50,3 +50,6 @@ Route::post('/mail_verif',[App\Http\Controllers\EmailVerifController::class,'ver
 Route::get('/face_login_verif',[App\Http\Controllers\EmailVerifController::class,'index'])->name('face-login');
 Route::get('/instructor_list',[App\Http\Controllers\InstructorController::class,'getInstructorList'])->name('instructor-list');
 Route::get('/bilan',[App\Http\Controllers\HomeController::class,'bilan'])->name('bilan');
+Route::resource('partners',PartnerController::class);
+Route::resource('referentials', ReferentialController::class);
+Route::resource('trainings',TrainingController::class);

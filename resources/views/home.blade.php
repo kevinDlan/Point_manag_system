@@ -10,9 +10,12 @@ Accueil
                 <div class="card-header">{{ __('Tableau de Bord')}}</div>
                 <div class="card-body">
                     @if(Auth::user()->type === 'admin')
-                   <a href="{{route('create-partner-form')}}">Ajouter un partenaire</a><br>
-                   <a href="{{route('create-train-ref')}}">Création de référentiel</a><br>
-                   <a href="{{route('training')}}">Créer une formation</a><br>
+                   <a href="{{route('partners.create')}}">Ajouter un partenaire</a><br>
+                   <a href="{{route('partners.index')}}">Liste des partenaires</a><br>
+                   <a href="{{route('referentials.create')}}">Création de référentiel</a><br>
+                   <a href="{{route('referentials.index')}}">Liste des Référentiels</a><br>
+                   <a href="{{route('trainings.create')}}">Créer une formation</a><br>
+                   <a href="{{route('trainings.index')}}">Liste des formations</a><br>
                    <a href="{{route('create-student-form')}}">Enregistrer un Apprenant</a><br>
                    <a href="{{route('create-instructor-form')}}">Ajouter un formateur</a><br>
                    <a href="{{route('presence-liste')}}">Liste de présence</a><br>
